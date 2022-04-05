@@ -114,5 +114,10 @@ namespace RecipeApp.Models
 		/// </summary>
 		[Required(ErrorMessage = "Potassium field is required.")]
 		public double Potassium { get; set; }
+
+		/// <summary>
+		/// Collection of recipes in which this ingredient is found
+		/// </summary>
+		public ICollection<Recipe>? Recipes { get; set; }
 	}
 }
