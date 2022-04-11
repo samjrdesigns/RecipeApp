@@ -1,0 +1,132 @@
+﻿@page
+@model RecipeApp.Pages.Ingredients.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].ServingSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].Calories)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].TotalFat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].SaturatedFat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].TransFat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].Cholesterol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].Sodium)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].TotalCarbs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].DietaryFiber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].TotalSugars)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].AddedSugars)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].Protein)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].VitaminD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].Calcium)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].Iron)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient[0].Potassium)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Ingredient) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServingSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calories)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalFat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaturatedFat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransFat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cholesterol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sodium)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCarbs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DietaryFiber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalSugars)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddedSugars)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Protein)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VitaminD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calcium)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Iron)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Potassium)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

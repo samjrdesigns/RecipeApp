@@ -1,0 +1,115 @@
+﻿@page
+@model RecipeApp.Pages.Ingredients.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Ingredient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Ingredient.Id" />
+            <div class="form-group">
+                <label asp-for="Ingredient.Name" class="control-label"></label>
+                <input asp-for="Ingredient.Name" class="form-control" />
+                <span asp-validation-for="Ingredient.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.ServingSize" class="control-label"></label>
+                <input asp-for="Ingredient.ServingSize" class="form-control" />
+                <span asp-validation-for="Ingredient.ServingSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.Calories" class="control-label"></label>
+                <input asp-for="Ingredient.Calories" class="form-control" />
+                <span asp-validation-for="Ingredient.Calories" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.TotalFat" class="control-label"></label>
+                <input asp-for="Ingredient.TotalFat" class="form-control" />
+                <span asp-validation-for="Ingredient.TotalFat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.SaturatedFat" class="control-label"></label>
+                <input asp-for="Ingredient.SaturatedFat" class="form-control" />
+                <span asp-validation-for="Ingredient.SaturatedFat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.TransFat" class="control-label"></label>
+                <input asp-for="Ingredient.TransFat" class="form-control" />
+                <span asp-validation-for="Ingredient.TransFat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.Cholesterol" class="control-label"></label>
+                <input asp-for="Ingredient.Cholesterol" class="form-control" />
+                <span asp-validation-for="Ingredient.Cholesterol" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.Sodium" class="control-label"></label>
+                <input asp-for="Ingredient.Sodium" class="form-control" />
+                <span asp-validation-for="Ingredient.Sodium" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.TotalCarbs" class="control-label"></label>
+                <input asp-for="Ingredient.TotalCarbs" class="form-control" />
+                <span asp-validation-for="Ingredient.TotalCarbs" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.DietaryFiber" class="control-label"></label>
+                <input asp-for="Ingredient.DietaryFiber" class="form-control" />
+                <span asp-validation-for="Ingredient.DietaryFiber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.TotalSugars" class="control-label"></label>
+                <input asp-for="Ingredient.TotalSugars" class="form-control" />
+                <span asp-validation-for="Ingredient.TotalSugars" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.AddedSugars" class="control-label"></label>
+                <input asp-for="Ingredient.AddedSugars" class="form-control" />
+                <span asp-validation-for="Ingredient.AddedSugars" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.Protein" class="control-label"></label>
+                <input asp-for="Ingredient.Protein" class="form-control" />
+                <span asp-validation-for="Ingredient.Protein" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.VitaminD" class="control-label"></label>
+                <input asp-for="Ingredient.VitaminD" class="form-control" />
+                <span asp-validation-for="Ingredient.VitaminD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.Calcium" class="control-label"></label>
+                <input asp-for="Ingredient.Calcium" class="form-control" />
+                <span asp-validation-for="Ingredient.Calcium" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.Iron" class="control-label"></label>
+                <input asp-for="Ingredient.Iron" class="form-control" />
+                <span asp-validation-for="Ingredient.Iron" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient.Potassium" class="control-label"></label>
+                <input asp-for="Ingredient.Potassium" class="form-control" />
+                <span asp-validation-for="Ingredient.Potassium" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
