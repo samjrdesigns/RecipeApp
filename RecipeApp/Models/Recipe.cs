@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecipeApp.Models
 {
@@ -52,9 +53,14 @@ namespace RecipeApp.Models
         public byte[]? Picture { get; set; }
 
         /// <summary>
+        /// URL of picture to use
+        /// </summary>
+        [NotMapped]
+        public string? PictureUrl { get; set; }
+
+        /// <summary>
         /// Collection of ingredients used by this recipe
         /// </summary>
         public ICollection<Ingredient>? Ingredients { get; set; }
-
     }
 }

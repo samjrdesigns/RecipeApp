@@ -48,15 +48,25 @@
                 <input asp-for="Recipe.Yield" class="form-control" />
                 <span asp-validation-for="Recipe.Yield" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" hidden>
                 <label asp-for="Recipe.Picture" class="control-label"></label>
                 <input asp-for="Recipe.Picture" class="form-control" />
                 <span asp-validation-for="Recipe.Picture" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Recipe.PictureUrl" class="control-label"></label>
+                <input id="pic-url" asp-for="Recipe.PictureUrl" class="form-control" />
+                <button id="btn-preview" type="button">Preview</button>
+                <span asp-validation-for="Recipe.PictureUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
+        <div>
+            <h3>Picture Preview</h3>
+            <img id="pic-preview" src="" />
+        </div>
     </div>
 </div>
 
@@ -66,4 +76,15 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function() {
+            $("#btn-preview").click(function(){
+                //alert($("#pic-url").val());
+                $.ajax({url: "Create/?handler=preview", data: { url: $("#pic-url").val() }, success: function(result){
+                    $("#pic-preview").attr("src", "data:image;base64," + result);
+                }});
+            });
+            $("#btn-preview").click();
+        });
+    </script>
 }
