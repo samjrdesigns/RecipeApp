@@ -34,6 +34,22 @@ namespace RecipeApp.Migrations
                     b.ToTable("IngredientRecipe");
                 });
 
+            modelBuilder.Entity("RecipeApp.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("RecipeApp.Models.Ingredient", b =>
                 {
                     b.Property<int>("Id")
@@ -100,13 +116,16 @@ namespace RecipeApp.Migrations
 
                     b.HasIndex("UnitsId");
 
-                    b.ToTable("Ingredient");
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("RecipeApp.Models.Recipe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CookTime")
@@ -140,6 +159,8 @@ namespace RecipeApp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Recipes");
                 });
 
@@ -148,6 +169,10 @@ namespace RecipeApp.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<double>("Conversion")
                         .HasColumnType("double");
@@ -161,7 +186,7 @@ namespace RecipeApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UnitOfMeasure");
+                    b.ToTable("Units");
                 });
 
             modelBuilder.Entity("IngredientRecipe", b =>
@@ -188,6 +213,15 @@ namespace RecipeApp.Migrations
                         .IsRequired();
 
                     b.Navigation("Units");
+                });
+
+            modelBuilder.Entity("RecipeApp.Models.Recipe", b =>
+                {
+                    b.HasOne("RecipeApp.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

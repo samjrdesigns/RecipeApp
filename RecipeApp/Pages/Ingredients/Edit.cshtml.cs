@@ -31,7 +31,7 @@ namespace RecipeApp.Pages.Ingredients
                 return NotFound();
             }
 
-            Ingredient = await _context.Ingredient.FirstOrDefaultAsync(m => m.Id == id);
+            Ingredient = await _context.Ingredients.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Ingredient == null)
             {
@@ -72,7 +72,7 @@ namespace RecipeApp.Pages.Ingredients
 
         private bool IngredientExists(int id)
         {
-            return _context.Ingredient.Any(e => e.Id == id);
+            return _context.Ingredients.Any(e => e.Id == id);
         }
     }
 }

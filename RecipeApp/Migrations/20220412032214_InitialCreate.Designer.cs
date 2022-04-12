@@ -11,7 +11,7 @@ using RecipeApp.Data;
 namespace RecipeApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220403014844_InitialCreate")]
+    [Migration("20220412032214_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,37 @@ namespace RecipeApp.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("IngredientRecipe", b =>
+                {
+                    b.Property<int>("IngredientsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecipesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IngredientsId", "RecipesId");
+
+                    b.HasIndex("RecipesId");
+
+                    b.ToTable("IngredientRecipe");
+                });
+
+            modelBuilder.Entity("RecipeApp.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
 
             modelBuilder.Entity("RecipeApp.Models.Ingredient", b =>
                 {
@@ -56,9 +87,6 @@ namespace RecipeApp.Migrations
                     b.Property<double>("Protein")
                         .HasColumnType("double");
 
-                    b.Property<int?>("RecipeId")
-                        .HasColumnType("int");
-
                     b.Property<double>("SaturatedFat")
                         .HasColumnType("double");
 
@@ -88,17 +116,18 @@ namespace RecipeApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecipeId");
-
                     b.HasIndex("UnitsId");
 
-                    b.ToTable("Ingredient");
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("RecipeApp.Models.Recipe", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int?>("CookTime")
@@ -112,9 +141,9 @@ namespace RecipeApp.Migrations
                         .HasMaxLength(4000)
                         .HasColumnType("varchar(4000)");
 
-                    b.Property<string>("Modifications")
-                        .HasMaxLength(2000)
-                        .HasColumnType("varchar(2000)");
+                    b.Property<string>("Notes")
+                        .HasMaxLength(4000)
+                        .HasColumnType("varchar(4000)");
 
                     b.Property<byte[]>("Picture")
                         .HasColumnType("longblob");
@@ -132,6 +161,8 @@ namespace RecipeApp.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Recipes");
                 });
 
@@ -140,6 +171,10 @@ namespace RecipeApp.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<double>("Conversion")
                         .HasColumnType("double");
@@ -153,15 +188,26 @@ namespace RecipeApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UnitOfMeasure");
+                    b.ToTable("Units");
+                });
+
+            modelBuilder.Entity("IngredientRecipe", b =>
+                {
+                    b.HasOne("RecipeApp.Models.Ingredient", null)
+                        .WithMany()
+                        .HasForeignKey("IngredientsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RecipeApp.Models.Recipe", null)
+                        .WithMany()
+                        .HasForeignKey("RecipesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("RecipeApp.Models.Ingredient", b =>
                 {
-                    b.HasOne("RecipeApp.Models.Recipe", null)
-                        .WithMany("IngredientList")
-                        .HasForeignKey("RecipeId");
-
                     b.HasOne("RecipeApp.Models.UnitOfMeasure", "Units")
                         .WithMany()
                         .HasForeignKey("UnitsId")
@@ -173,7 +219,11 @@ namespace RecipeApp.Migrations
 
             modelBuilder.Entity("RecipeApp.Models.Recipe", b =>
                 {
-                    b.Navigation("IngredientList");
+                    b.HasOne("RecipeApp.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

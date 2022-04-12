@@ -15,6 +15,11 @@ namespace RecipeApp.Models
         public string Title { get; set; } = string.Empty;
 
         /// <summary>
+        /// Recipe category
+        /// </summary>
+        public Category? Category { get; set; }
+
+        /// <summary>
         /// Recipe description
         /// </summary>
         [StringLength(maximumLength: 1000)]

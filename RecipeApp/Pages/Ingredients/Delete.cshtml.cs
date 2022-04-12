@@ -30,7 +30,7 @@ namespace RecipeApp.Pages.Ingredients
                 return NotFound();
             }
 
-            Ingredient = await _context.Ingredient.FirstOrDefaultAsync(m => m.Id == id);
+            Ingredient = await _context.Ingredients.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Ingredient == null)
             {
@@ -46,11 +46,11 @@ namespace RecipeApp.Pages.Ingredients
                 return NotFound();
             }
 
-            Ingredient = await _context.Ingredient.FindAsync(id);
+            Ingredient = await _context.Ingredients.FindAsync(id);
 
             if (Ingredient != null)
             {
-                _context.Ingredient.Remove(Ingredient);
+                _context.Ingredients.Remove(Ingredient);
                 await _context.SaveChangesAsync();
             }
 

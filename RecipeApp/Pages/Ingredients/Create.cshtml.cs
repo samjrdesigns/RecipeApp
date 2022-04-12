@@ -25,6 +25,11 @@ namespace RecipeApp.Pages.Ingredients
             return Page();
         }
 
+        public JsonResult OnGetUnits()
+        {
+            return new JsonResult(_context.Units);
+        }
+
         [BindProperty]
         public Ingredient Ingredient { get; set; }
 
@@ -36,7 +41,7 @@ namespace RecipeApp.Pages.Ingredients
                 return Page();
             }
 
-            _context.Ingredient.Add(Ingredient);
+            _context.Ingredients.Add(Ingredient);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -6,6 +6,8 @@
 
         public string Name { get; set; } = string.Empty;
 
+        public string Abbreviation { get; set; } = string.Empty;
+
         /// <summary>
         /// True if this unit of measure is for dry ingredients; false if meant for liquid ingredients
         /// </summary>
