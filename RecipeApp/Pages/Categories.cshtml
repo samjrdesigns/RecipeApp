@@ -1,0 +1,93 @@
+﻿@page
+@model RecipeApp.Pages.CategoriesModel
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h1>Categories</h1>
+
+<div>
+    <h4>Category</h4>
+    <hr />
+    @*<dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+    </dl>*@
+    <button id="getlist">Get List</button>
+    <button id="additem" onclick="newListItem()">Add Item</button>
+    <div id="list">
+
+    </div>
+</div>
+@*<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Category.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>*@
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $("#getlist").click(function(){
+                $.ajax({url: "Categories/?handler=readcategories", success: function(result){
+                    //alert(JSON.stringify(result));
+                    $("#list").empty();
+                    result.forEach(showListItem);
+                }});
+            });
+        });
+
+        function showListItem(item) {
+            $("#list").append(
+                `<div id="${item.id}">` +
+                    `<input type="text" class="form-control" value="${item.name}" readonly>` +
+                    `<button class="edit" onclick="editCategory('${item.id}')">Edit</button>` +
+                    `<button class="save" onclick="saveCategory('${item.id}')" hidden>Save</button>` +
+                    `<button class="cancel" onclick="cancelCategoryEdit('${item.id}')" hidden>Cancel</button>` +
+                    `<button class="delete" onclick="deleteCategory('${item.id}')">Delete</button>` +
+                "</div>"
+            );
+        }
+
+        function newListItem() {
+            showListItem({ id: "NEW", name: "New Category" });
+            $("#additem").prop("disabled", true);
+        }
+
+        function editCategory(id) {
+            //alert(id);
+            $(`#${id} > input`).prop("readonly", false);
+            $(`#${id} > button.edit`).prop("hidden", true);
+            $(`#${id} > button.save`).prop("hidden", false);
+            $(`#${id} > button.cancel`).prop("hidden", false);
+            $(`#${id} > button.delete`).prop("hidden", true);
+        }
+
+        function saveCategory(id) {
+            //alert(id);
+            $.ajax({url: "Categories/?handler=save", data: { idStr: id, name: $(`#${id} > input`).val() }, success: function(result){
+                //$(`#${id}`).remove();
+            }});
+        }
+
+        function cancelCategoryEdit(id) {
+            //alert(id);
+            $(`#${id} > input`).prop("readonly", true);
+            $(`#${id} > button.edit`).prop("hidden", false);
+            $(`#${id} > button.save`).prop("hidden", true);
+            $(`#${id} > button.cancel`).prop("hidden", true);
+            $(`#${id} > button.delete`).prop("hidden", false);
+        }
+
+        function deleteCategory(id) {
+            //alert(id);
+            $.ajax({url: "Categories/?handler=delete", data: { idStr: id }, success: function(result){
+                $(`#${id}`).remove();
+            }});
+        }
+    </script>
+}
